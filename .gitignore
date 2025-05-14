@@ -1,0 +1,9 @@
+# Python 관련 파일들
+*.pyc
+__pycache__/
+
+# 가상환경 폴더
+venv/
+
+# SQLite 데이터베이스 파일
+db.sqlite3

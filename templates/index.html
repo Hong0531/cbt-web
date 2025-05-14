@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>정보처리산업기사 CBT</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+<div class="main">
+
+    <!-- ✅ 로그인 여부에 따라 버튼 분기 -->
+    <div style="text-align: right; margin-bottom: 20px;">
+        {% if user_name %}
+            <p style="margin: 0;">👋 환영합니다, <strong>{{ user_name }}</strong>님</p>
+            <p style="margin: 4px 0;">
+            <a href="{{ url_for('records') }}" style="text-decoration: none;">📄 시험 기록 보기</a>
+            </p>
+            <form action="/logout" method="get" style="display: inline;">
+            <button type="submit">로그아웃</button>
+            </form>
+        {% else %}
+            <form action="/login" method="get">
+            <button type="submit">← 뒤로가기</button>
+            </form>
+        {% endif %}
+    </div>
+
+
+    <h2>정보처리산업기사 CBT 모의고사</h2>
+
+    <div id="start-panel">
+        <p>모드를 선택하세요:</p>
+        <button onclick="startQuiz('practice')">연습모드</button>
+        <button onclick="startQuiz('exam')">시험모드</button>
+    </div>
+
+    <div id="timer">90:00</div>
+    <div id="quiz-container" style="display:none;"></div>
+    <div id="controls" style="display:none;">
+        <button onclick="confirmFinish()">시험 종료</button>
+        <button onclick="returnToStart()">처음부터 다시 시작</button>
+    </div>
+    <div id="result"></div>
+    </div>
+
+    <div id="nav-panel">
+    <strong>문제 이동</strong>
+    <div id="question-buttons"></div>
+    </div>
+
+    <script>
+    let currentQuestion = 0;
+    let time = 90 * 60;
+    let timerInterval;
+    let userAnswers = [];
+    const questions = [];
+    let mode = 'exam';
+
+    function startQuiz(selectedMode) {
+    mode = selectedMode;
+    document.getElementById('start-panel').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('controls').style.display = 'block';
+    document.getElementById('nav-panel').style.display = 'block';
+    document.getElementById('timer').style.display = (mode === 'exam') ? 'block' : 'none';
+    userAnswers = new Array(questions.length).fill(null);
+    renderQuestion(0);
+    renderNavButtons();
+    if (mode === 'exam') startTimer();
+    }
+
+    function returnToStart() {
+    clearInterval(timerInterval);
+    document.getElementById('start-panel').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('controls').style.display = 'none';
+    document.getElementById('nav-panel').style.display = 'none';
+    document.getElementById('timer').style.display = 'none';
+    document.getElementById('result').innerHTML = '';
+    }
+
+    function startTimer() {
+    timerInterval = setInterval(() => {
+        const m = String(Math.floor(time / 60)).padStart(2, '0');
+        const s = String(time % 60).padStart(2, '0');
+        document.getElementById('timer').textContent = `${m}:${s}`;
+        time--;
+        if (time < 0) {
+        clearInterval(timerInterval);
+        finishQuiz();
+        }
+    }, 1000);
+    }
+
+    function renderQuestion(index) {
+    const q = questions[index];
+    currentQuestion = index;
+    const selected = userAnswers[index];
+    document.getElementById('quiz-container').innerHTML = `
+        <div id="question-${index + 1}" class="question-box">
+        <h3>문제 ${index + 1} / ${questions.length}</h3>
+        <p>${q.question}</p>
+        <div class="options">
+            ${q.options.map((opt, i) => `
+            <label><input type="radio" name="option" value="${i}" ${selected == i ? "checked" : ""}> ${i + 1}. ${opt}</label>
+            `).join('')}
+        </div>
+        ${mode === 'practice' ? `<button onclick="toggleExplanation(${index})">해설 보기</button><div id="exp-${index}" class="explanation">${q.explanation || '해설 없음'}</div>` : ''}
+        </div>
+        <div>
+        ${index > 0 ? `<button onclick="renderQuestion(${index - 1})">이전</button>` : ''}
+        ${index < questions.length - 1 ? `<button onclick="saveAnswerAndNext(${index})">다음</button>` : '<button onclick="finishQuiz()">제출</button>'}
+        </div>
+    `;
+    document.querySelectorAll('input[name="option"]').forEach(input => {
+        input.addEventListener('change', e => {
+        userAnswers[index] = parseInt(e.target.value);
+        updateNavButton(index);
+        });
+    });
+    }
+
+    function toggleExplanation(index) {
+    const exp = document.getElementById(`exp-${index}`);
+    if (exp) exp.style.display = exp.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function saveAnswerAndNext(index) {
+    updateNavButton(index);
+    renderQuestion(index + 1);
+    }
+
+    function confirmFinish() {
+    if (confirm("정말 시험을 종료하시겠습니까?")) {
+        finishQuiz();
+    }
+    }
+
+    function finishQuiz() {
+    clearInterval(timerInterval);
+    let score = 0;
+    const resultContainer = document.getElementById('result');
+    resultContainer.innerHTML = '';
+
+    const subjectScores = [0, 0, 0];
+    const subjectCounts = [0, 0, 0];
+
+    questions.forEach((q, i) => {
+        const correct = q.answer;
+        const user = userAnswers[i];
+        const isAnswered = (user !== undefined && user !== null);
+        const isCorrect = isAnswered && (user + 1) === correct;
+        const correctText = `${correct}. ${q.options[correct - 1]}`;
+        const userText = isAnswered ? `${user + 1}. ${q.options[user]}` : '미응답';
+        const subjectIndex = Math.floor(i / 20);
+
+        if (isCorrect) score++, subjectScores[subjectIndex]++;
+        subjectCounts[subjectIndex]++;
+
+        resultContainer.innerHTML += `
+        <div style='margin-bottom:8px;'>
+            <strong>문제 ${i + 1}</strong><br>
+            당신의 답: ${userText}<br>
+            ${isCorrect ? '<span style="color:green">정답입니다!</span>' : `<span style="color:red">틀렸습니다. 정답: ${correctText}</span>`}<br>
+            <em style="color:gray;">해설: ${q.explanation || '해설 없음'}</em>
+        </div>
+        `;
+    });
+
+    const subjectResults = subjectScores.map((s, i) => {
+        const total = subjectCounts[i];
+        const percentage = Math.round((s / total) * 100);
+        return `과목 ${i + 1}: ${percentage}점`;
+    });
+
+    const totalScore = Math.round((score / questions.length) * 100);
+    const isPassed = subjectScores.every((s, i) => (s / subjectCounts[i]) * 100 >= 40) && totalScore >= 60;
+    const passMessage = isPassed
+        ? "<span style='color:green; font-weight:bold;'>합격입니다! 🎉</span>"
+        : "<span style='color:red; font-weight:bold;'>불합격입니다.</span>";
+
+    resultContainer.innerHTML += `
+        <hr>
+        <strong>총점: ${totalScore}점</strong><br>
+        ${subjectResults.join('<br>')}<br><br>
+        ${passMessage}`;
+    if (mode === 'exam') {
+        fetch("/api/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                answers: userAnswers,
+                mode: mode  // 꼭 보내야 백엔드에서 exam 판별 가능
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("✅ 서버 응답:", data);
+        })
+        .catch(err => {
+            console.error("❌ 제출 실패:", err);
+        });
+        }
+    }
+    function renderNavButtons() {
+    const nav = document.getElementById('question-buttons');
+    nav.innerHTML = '';
+    questions.forEach((_, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = i + 1;
+        btn.onclick = () => renderQuestion(i);
+        btn.style.backgroundColor = userAnswers[i] === undefined || userAnswers[i] === null ? '#ddd' : '#cce5ff';
+        nav.appendChild(btn);
+    });
+    }
+
+    function updateNavButton(index) {
+    const nav = document.getElementById('question-buttons');
+    const btn = nav.children[index];
+    if (btn) {
+        btn.style.backgroundColor = userAnswers[index] === undefined || userAnswers[index] === null ? '#ddd' : '#cce5ff';
+    }
+    }
+
+    fetch("/api/questions")
+    .then(res => res.json())
+    .then(data => {
+        questions.push(...data);
+        console.log("문제 수:", questions.length); // 디버깅 로그 추가
+    })
+    .catch(err => console.error("문제 불러오기 실패:", err));
+</script>
+</body>
+</html>

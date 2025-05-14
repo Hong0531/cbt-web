@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.name }}님의 시험 결과</title>
+</head>
+<body>
+    <h2>{{ user.name }}님의 시험 결과</h2>
+    {% if answers %}
+        <table class="summary-table">
+            <thead>
+                <tr>
+                <th>순번</th>
+                <th>성 명</th>
+                <th>문제 풀기 완료 시간</th>
+                <th>소요 시간</th>
+                <th>과목 명</th>
+                <th>기출문제날짜<br><span class="red-link">(틀린문제보기,새창)</span></th>
+                <th>갯수</th>
+                <th>점수</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for idx, record in records %}
+                <tr>
+                <td>{{ idx }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ record.completed_at }}</td>
+                <td class="gray">{{ record.duration }}</td>
+                <td>과목 {{ record.subject }}</td>
+                <td class="red-link"><a href="{{ url_for('view_wrong', id=record.id) }}" target="_blank">보기</a></td>
+                <td>{{ record.total }}</td>
+                <td><strong>{{ record.score }}</strong></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+
+
+            <div class="summary-buttons">
+            <button onclick="window.print()">인쇄</button>
+            <button onclick="downloadCSV()">CSV</button>
+            <form action="/exam" style="display:inline;">
+                <button type="submit">첫화면으로</button>
+            </form>
+            </div>
+
+    {% else %}
+        <p>아직 저장된 응시 기록이 없습니다.</p>
+    {% endif %}
+
+    <br>
+    <form action="/exam" method="get">
+        <button type="submit">← 시험 페이지로 돌아가기</button>
+    </form>
+
+    <script>
+        function downloadCSV() {
+        const csv = "순번,성명,완료시간,소요시간,과목명,틀린문제링크,총갯수,점수\\n";
+        // TODO: 서버 데이터 반복해서 csv 문자열로 붙이기
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = '시험기록.csv';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        }
+    </script>
+
+</body>
+</html>
