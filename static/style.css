@@ -1,0 +1,190 @@
+/* style.css */
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    width: 760px;
+    padding: 30px;
+    background: #ffffff;
+    margin-top: 60px;
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+.question-box {
+    margin-bottom: 24px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.options label {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.options label:hover {
+    background: #f1f1f1;
+}
+
+#timer {
+    position: fixed;
+    top: 12px;
+    right: 24px;
+    background: #ffeb3b;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+#nav-panel {
+    position: fixed;
+    right: 12px;
+    top: 80px;
+    width: 200px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: none;
+}
+
+#question-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+#question-buttons button {
+    width: 42px;
+    padding: 6px;
+    background: #eeeeee;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+#question-buttons button:hover {
+    background: #d0ebff;
+}
+
+#start-panel {
+    text-align: center;
+    margin-top: 120px;
+    padding: 40px;
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#start-panel h2 {
+    font-size: 2.4em;
+    color: #0277bd;
+    margin-bottom: 20px;
+}
+
+#start-panel p {
+    font-size: 1.2em;
+    color: #444;
+}
+
+#start-panel button {
+    margin: 12px;
+    padding: 14px 28px;
+    font-size: 1.1em;
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+#start-panel button:hover {
+    background-color: #01579b;
+    transform: scale(1.05);
+}
+
+.explanation {
+    display: none;
+    color: #555;
+    font-size: 0.95em;
+    margin-top: 10px;
+    border-left: 4px solid #90caf9;
+    padding-left: 10px;
+}
+.summary-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 3px solid #90caf9;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 30px;
+    background: white;
+}
+
+.summary-table th, .summary-table td {
+    padding: 14px;
+    text-align: center;
+    border-right: 1px solid #e0e0e0;
+}
+
+.summary-table th:last-child,
+.summary-table td:last-child {
+    border-right: none;
+}
+
+.summary-table thead {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.summary-table th {
+    color: #333;
+}
+
+.summary-table td.red-link {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.summary-table td.gray {
+    color: #777;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.summary-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.summary-buttons button {
+    background-color: #42a5f5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    margin: 0 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.summary-buttons button:hover {
+    background-color: #1e88e5;
+}

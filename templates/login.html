@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+</head>
+<body>
+    <h2>정보처리산업기사 CBT 로그인</h2>
+
+    <!-- 로그인 폼 -->
+    <form method="post" action="/login">
+        <label>이름: <input type="text" name="name" required></label>
+        <br><br>
+        <button type="submit">로그인</button>
+    </form>
+
+    <br><hr>
+
+    <!-- 회원가입 링크 -->
+    <p>처음이신가요? 👉 <a href="/signup">회원가입</a></p>
+
+    <!-- 게스트로 바로 시험 시작 -->
+    <form action="/exam" method="get">
+        <button type="submit">게스트로 시험 시작</button>
+    </form>
+
+</body>
+</html>
