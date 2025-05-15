@@ -3,4 +3,5 @@ Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.0.1
 Flask-Login==0.6.1
 gunicorn==20.1.0
+sqlalchemy==1.4.48
 werkzeug==2.3.8
