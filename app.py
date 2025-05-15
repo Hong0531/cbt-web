@@ -1,36 +1,30 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session
-from models import db, User, Answer
+from models import db, User, Answer, ExamRecord
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
-app.secret_key = '0531'  # 🛑 진짜 서비스에서는 강력한 랜덤 키로!
+app.secret_key = '0531'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-# DB 초기화 함수
 def create_tables():
     with app.app_context():
         db.create_all()
 
-# 로그인 화면이 기본 페이지
 @app.route('/')
 def index():
     return render_template('login.html')
 
-# 회원가입 처리 (이름만으로 등록)
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         name = request.form['name'].strip()
-
         if not name:
             return "이름을 입력해주세요.", 400
-
-        # 중복 체크
         existing = User.query.filter_by(name=name).first()
         if existing:
             return f"""
@@ -42,13 +36,9 @@ def signup():
             <button type="submit">로그인하러 가기</button>
             </form>
             """
-
-        # 사용자 생성
         user = User(name=name)
         db.session.add(user)
         db.session.commit()
-
-        # ✅ 가입 완료 메시지 + 자동 리디렉션
         return f"""
         <p>{name}님 가입 완료!</p>
         <p>3초 후 로그인 페이지로 이동합니다...</p>
@@ -57,7 +47,6 @@ def signup():
         </form>
         <meta http-equiv="refresh" content="3; url=/login">
         """
-
     return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -84,12 +73,11 @@ def login():
 def exam_page():
     user_id = session.get('user_id')
     user_name = None
-
+    session['start_time'] = (datetime.utcnow() + timedelta(hours=9)).isoformat()
     if user_id:
         user = User.query.get(user_id)
         if user:
             user_name = user.name
-
     return render_template('index.html', user_id=user_id, user_name=user_name)
 
 @app.route('/logout')
@@ -97,71 +85,87 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-# API: 답안 제출
 @app.route('/api/submit', methods=['POST'])
 def submit_answers():
     user_id = session.get('user_id')
     data = request.get_json()
     answers = data.get('answers', [])
-    mode = data.get('mode', 'exam')  # 기본값은 'exam'
-
-    # 연습모드이거나 로그인 안 했으면 저장하지 않음
+    mode = data.get('mode', 'exam')
     if mode != 'exam' or not user_id:
         return jsonify({"message": "연습모드는 기록을 저장하지 않습니다."})
-
-    # 문제 불러오기
     with open('data/cbt_questions_2024_final.json', encoding='utf-8') as f:
         question_data = json.load(f)
-
+    start_time_str = session.get('start_time')
+    if start_time_str:
+        start_time = datetime.fromisoformat(start_time_str)
+    else:
+        start_time = datetime.utcnow() + timedelta(hours=9)
+    end_time = datetime.utcnow() + timedelta(hours=9)
+    correct_count = 0
     for idx, ans in enumerate(answers):
         q = question_data[idx]
         correct_answer = q["answer"]
         selected = ans if ans is not None else None
-
+        is_correct = (selected + 1) == correct_answer if selected is not None else False
+        if is_correct:
+            correct_count += 1
         answer_obj = Answer(
             user_id=user_id,
             question_id=idx + 1,
             selected=selected,
-            is_correct=((selected + 1) == correct_answer) if selected is not None else False,
-            timestamp=datetime.utcnow()
+            is_correct=is_correct,
+            timestamp=end_time
         )
         db.session.add(answer_obj)
-
+    exam_record = ExamRecord(
+        user_id=user_id,
+        start_time=start_time,
+        end_time=end_time,
+        correct_count=correct_count
+    )
+    db.session.add(exam_record)
     db.session.commit()
+    session['last_duration'] = (end_time - start_time).total_seconds()
+    session['last_correct'] = correct_count
     return jsonify({"message": "시험 응시 기록이 저장되었습니다."})
 
-@app.route('/records')
-def records():
-    user_id = session.get('user_id')
-    if not user_id:
-        return redirect(url_for('login'))
+@app.route('/wrong/<int:user_id>')
+def view_wrong_answers(user_id):
+    from sqlalchemy import desc
+    answers = Answer.query.filter_by(user_id=user_id).order_by(Answer.question_id, desc(Answer.timestamp)).all()
+    latest_per_question = {}
+    for ans in answers:
+        if ans.question_id not in latest_per_question:
+            latest_per_question[ans.question_id] = ans
+    wrong_answers = [ans for ans in latest_per_question.values() if not ans.is_correct]
+    with open('data/cbt_questions_2024_final.json', encoding='utf-8') as f:
+        question_data = json.load(f)
+    enriched = []
+    for ans in wrong_answers:
+        q = question_data[ans.question_id - 1]
+        enriched.append({
+            "question_id": ans.question_id,
+            "question": q["question"],
+            "options": q["options"],
+            "answer": q["answer"],
+            "explanation": q.get("explanation", ""),
+            "selected": ans.selected,
+            "timestamp": ans.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+        })
+    return render_template("wrong_answers.html", wrong=enriched)
 
-    user = User.query.get(user_id)
-    
-    # 사용자별 시험 기록 불러오기
-    records = Answer.query.filter_by(user_id=user_id).order_by(Answer.timestamp.desc()).all()
-
-    # enumerate 처리 후 전달
-    records_with_idx = [(idx + 1, record) for idx, record in enumerate(records)]
-
-    return render_template('results.html', user=user, records=records_with_idx)
-
-# API: 문제 불러오기
 @app.route('/api/questions')
 def get_questions():
     with open('data/cbt_questions_2024_final.json', encoding='utf-8') as f:
         questions = json.load(f)
     return jsonify(questions)
 
-# API: 답안 조회
 @app.route('/api/answers')
 def get_user_answers():
     user_id = session.get('user_id')
     if not user_id:
         return jsonify({"error": "로그인이 필요합니다."}), 401
-
     answers = Answer.query.filter_by(user_id=user_id).order_by(Answer.timestamp.desc()).all()
-
     result = []
     for ans in answers:
         result.append({
@@ -170,8 +174,34 @@ def get_user_answers():
             "is_correct": ans.is_correct,
             "timestamp": ans.timestamp.strftime("%Y-%m-%d %H:%M:%S")
         })
-
     return jsonify(result)
+
+@app.route('/records')
+def records():
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('login'))
+
+    user = User.query.get(user_id)
+    exam_records = ExamRecord.query.filter_by(user_id=user_id).order_by(ExamRecord.end_time.desc()).all()
+
+    records = []
+    for idx, record in enumerate(exam_records):
+        duration = record.end_time - record.start_time
+        minutes = int(duration.total_seconds() // 60)
+        seconds = int(duration.total_seconds() % 60)
+
+        records.append({
+            "순번": idx + 1,
+            "성명": user.name,
+            "completed_at": (record.end_time).strftime("%Y년%m월%d일 %H시%M분%S초"),
+            "duration": f"{minutes:02}분 {seconds:02}초",
+            "subject": "정보처리산업기사",
+            "total": record.correct_count,
+            "score": f"{round(record.correct_count / 60 * 100)}점"
+        })
+
+    return render_template('results.html', user=user, records=records)
 
 if __name__ == '__main__':
     create_tables()

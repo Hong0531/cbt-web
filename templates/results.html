@@ -3,70 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ user.name }}님의 시험 결과</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>{{ user.name }}님의 시험 결과</h2>
-    {% if answers %}
-        <table class="summary-table">
-            <thead>
-                <tr>
+
+<div class="main">
+    <!-- 시험 결과 제목 -->
+    <h1 class="page-title">{{ user.name }}님의 시험 결과</h1>
+
+    {% if records %}
+    <!-- 결과 테이블 -->
+    <table class="summary-table">
+        <thead>
+            <tr>
                 <th>순번</th>
                 <th>성 명</th>
                 <th>문제 풀기 완료 시간</th>
                 <th>소요 시간</th>
                 <th>과목 명</th>
-                <th>기출문제날짜<br><span class="red-link">(틀린문제보기,새창)</span></th>
+                <th>기출문제 보기<br><span class="red-link">(틀린 문제 보기, 새창)</span></th>
                 <th>갯수</th>
                 <th>점수</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for idx, record in records %}
-                <tr>
-                <td>{{ idx }}</td>
-                <td>{{ user.name }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.순번 }}</td>
+                <td>{{ record.성명 }}</td>
                 <td>{{ record.completed_at }}</td>
                 <td class="gray">{{ record.duration }}</td>
-                <td>과목 {{ record.subject }}</td>
-                <td class="red-link"><a href="{{ url_for('view_wrong', id=record.id) }}" target="_blank">보기</a></td>
+                <td>{{ record.subject }}</td>
+                <td class="red-link">
+                    <a href="{{ url_for('view_wrong_answers', user_id=user.id) }}" target="_blank">보기</a>
+                </td>
                 <td>{{ record.total }}</td>
                 <td><strong>{{ record.score }}</strong></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            </table>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-
-            <div class="summary-buttons">
-            <button onclick="window.print()">인쇄</button>
-            <button onclick="downloadCSV()">CSV</button>
-            <form action="/exam" style="display:inline;">
-                <button type="submit">첫화면으로</button>
-            </form>
-            </div>
+    <!-- 하단 버튼 -->
+    <div class="summary-buttons">
+        <form action="/exam">
+            <button class="home-button" type="submit">🏠 첫화면으로</button>
+        </form>
+    </div>
 
     {% else %}
-        <p>아직 저장된 응시 기록이 없습니다.</p>
+    <p style="text-align:center; font-size: 1.2em; margin-top: 40px;">
+        아직 저장된 응시 기록이 없습니다.
+    </p>
     {% endif %}
-
-    <br>
-    <form action="/exam" method="get">
-        <button type="submit">← 시험 페이지로 돌아가기</button>
-    </form>
-
-    <script>
-        function downloadCSV() {
-        const csv = "순번,성명,완료시간,소요시간,과목명,틀린문제링크,총갯수,점수\\n";
-        // TODO: 서버 데이터 반복해서 csv 문자열로 붙이기
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = '시험기록.csv';
-        a.click();
-        window.URL.revokeObjectURL(url);
-        }
-    </script>
+</div>
 
 </body>
 </html>

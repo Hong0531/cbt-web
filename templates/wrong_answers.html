@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>틀린 문제 보기</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main">
+        <h2>틀린 문제 보기</h2>
+
+        {% if wrong %}
+        {% for item in wrong %}
+            <div class="question-box">
+            <h3>문제 {{ item.question_id }}</h3>
+            <p>{{ item.question }}</p>
+
+            <ul>
+                {% for opt in item.options %}
+                <li>
+                    {% set opt_index = loop.index %}
+                    {% if opt_index == item.answer %}
+                    <span style="color:green; font-weight:bold;">✔ 정답 {{ opt_index }}. {{ opt }}</span>
+                    {% elif item.selected is not none and opt_index == (item.selected + 1) %}
+                    <span style="color:red;">✖ 선택 {{ opt_index }}. {{ opt }}</span>
+                    {% else %}
+                    {{ opt_index }}. {{ opt }}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% if item.explanation %}
+                <p style="font-style: italic; color: gray;">해설: {{ item.explanation }}</p>
+            {% endif %}
+
+            <p style="font-size: 0.9em; color: #999;">응시 시간: {{ item.timestamp }}</p>
+            </div>
+        {% endfor %}
+        {% else %}
+        <p>틀린 문제가 없습니다. 🎉 완벽해요!</p>
+        {% endif %}
+
+        <form action="/exam">
+        <button type="submit">← 시험 페이지로 돌아가기</button>
+        </form>
+    </div>
+</body>
+</html>
