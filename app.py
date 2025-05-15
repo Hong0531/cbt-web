@@ -203,6 +203,7 @@ def records():
 
     return render_template('results.html', user=user, records=records)
 
-if __name__ == '__main__':
-    create_tables()
-    app.run(debug=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 8080))  # 기본 포트 8080
+    app.run(host="0.0.0.0", port=port)
