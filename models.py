@@ -18,3 +18,10 @@ class Answer(db.Model):
 
     user = db.relationship('User', backref=db.backref('answers', lazy=True))
 
+class ExamRecord(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)
+    correct_count = db.Column(db.Integer, nullable=False)
+    user = db.relationship('User', backref=db.backref('exam_records', lazy=True))
