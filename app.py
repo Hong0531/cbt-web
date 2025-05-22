@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session
-from models import db, User, Answer, ExamRecord, Question  # ✅ Question 모델도 import
+from models import db, User, Answer, ExamRecord, Question
 import json
 import os
 from datetime import datetime, timedelta
@@ -9,7 +9,6 @@ REMOVED_SECRET
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:1234@localhost/cbt_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db.init_app(app)
 
 @app.route('/')
@@ -36,59 +35,82 @@ def login():
     if request.method == 'POST':
         name = request.form['name'].strip()
         user = User.query.filter_by(name=name).first()
-
         if not user:
             return render_template("login.html", error="존재하지 않는 사용자입니다.")
-
-        # 로그인 성공 → 세션 저장
         session['user_id'] = user.id
         session['user_name'] = user.name
-
-        # ✅ 시험 종목 선택 페이지로 리디렉션
         return redirect(url_for('select_subject'))
-
     return render_template("login.html")
+
+@app.route('/guest')
+def guest_login():
+    session.clear()
+    session['user_id'] = None
+    session['user_name'] = '게스트'
+    return redirect(url_for('select_subject'))  # ✅ 과목 선택 페이지로 리디렉션
+
 
 @app.route('/select')
 def select_subject():
-    return render_template('exam_select.html')
+    return render_template('exam_select.html', user_name=session.get('user_name'))
 
 @app.route('/exam')
 def exam_page():
     subject = request.args.get('subject')
     version = request.args.get('version')
+
+    # ✅ 필수 파라미터 없으면 select로 돌려보냄
+    if not subject or not version:
+        return redirect(url_for('select_subject'))
+
     session['subject'] = subject
     session['version'] = version
     session['start_time'] = (datetime.utcnow() + timedelta(hours=9)).isoformat()
 
     user_id = session.get('user_id')
-    user_name = None
-    if user_id:
-        user = User.query.get(user_id)
-        user_name = user.name if user else None
+    user_name = session.get('user_name', '게스트')
 
-    return render_template('index.html', user_id=user_id, user_name=user_name, subject=subject, version=version)
+    return render_template('index.html', user_id=user_id, user_name=user_name,
+                            subject=subject, version=version)
+
+
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('login'))
 
+@app.route('/api/questions')
+def get_questions():
+    subject = request.args.get('subject') or session.get('subject', '정보처리산업기사')
+    version = request.args.get('version') or session.get('version', '2024-1')
+    
+    print(f"[DEBUG] subject: {subject}, version: {version}")  # 로그 확인용
+
+    questions = Question.query.filter_by(subject=subject, version=version).all()
+    result = [{
+        "id": q.id,
+        "question": q.question,
+        "options": q.options,
+        "answer": q.answer,
+        "explanation": q.explanation
+    } for q in questions]
+    return jsonify(result)
+
+
 @app.route('/api/submit', methods=['POST'])
 def submit_answers():
     user_id = session.get('user_id')
     data = request.get_json()
     answers = data.get('answers', [])
-    mode = data.get('mode', 'exam')  # 'exam' 또는 'practice'
+    mode = data.get('mode', 'exam')
 
     subject = session.get('subject')
     version = session.get('version')
     questions = Question.query.filter_by(subject=subject, version=version).all()
-
     if not questions:
         return jsonify({"message": "문제를 불러올 수 없습니다."}), 400
 
-    # 공통 시간 처리
     start_time_str = session.get('start_time')
     start_time = datetime.fromisoformat(start_time_str) if start_time_str else datetime.utcnow() + timedelta(hours=9)
     end_time = datetime.utcnow() + timedelta(hours=9)
@@ -102,8 +124,6 @@ def submit_answers():
         is_correct = (selected + 1) == q.answer if selected is not None else False
         if is_correct:
             correct_count += 1
-
-        # 시험 모드인 경우만 기록 저장
         if mode == 'exam' and user_id:
             db.session.add(Answer(
                 user_id=user_id,
@@ -113,7 +133,6 @@ def submit_answers():
                 timestamp=end_time
             ))
 
-    # 시험 모드: 기록 저장
     if mode == 'exam' and user_id:
         db.session.add(ExamRecord(
             user_id=user_id,
@@ -122,12 +141,10 @@ def submit_answers():
             correct_count=correct_count
         ))
         db.session.commit()
-
         session['last_duration'] = (end_time - start_time).total_seconds()
         session['last_correct'] = correct_count
         return jsonify({"message": "시험 응시 기록이 저장되었습니다."})
 
-    # 연습 모드 응답
     return jsonify({
         "message": "✅ 연습 모드 - 기록은 저장되지 않음",
         "correct_count": correct_count,
@@ -162,20 +179,6 @@ def view_wrong_answers(user_id):
             })
 
     return render_template("wrong_answers.html", wrong=enriched)
-
-@app.route('/api/questions')
-def get_questions():
-    subject = session.get('subject', '정보처리산업기사')
-    version = session.get('version', '2024_1')
-    questions = Question.query.filter_by(subject=subject, version=version).all()
-    result = [{
-        "id": q.id,
-        "question": q.question,
-        "options": q.options,
-        "answer": q.answer,
-        "explanation": q.explanation
-    } for q in questions]
-    return jsonify(result)
 
 @app.route('/api/answers')
 def get_user_answers():
@@ -221,6 +224,5 @@ def records():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)

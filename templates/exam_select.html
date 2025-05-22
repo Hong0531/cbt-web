@@ -2,27 +2,31 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>시험 과목 및 연도 선택</title>
+    <title>시험 과목 선택</title>
 </head>
 <body>
     <h2>📚 시험 과목 선택</h2>
 
+    {% if user_name %}
+        <p><strong>{{ user_name }}님</strong>, 응시할 시험을 선택하세요.</p>
+    {% else %}
+        <p>게스트님, 시험 과목을 선택하세요.</p>
+    {% endif %}
+
+    <!-- ✅ 이 폼이 핵심 -->
     <form action="/exam" method="get">
-        <!-- 과목 선택 -->
         <label for="subject">과목:</label>
         <select name="subject" id="subject" required>
         <option value="정보처리산업기사">정보처리산업기사</option>
         <option value="정보처리기능사">정보처리기능사</option>
-        <option value="컵퓨터활용능력2급">컵퓨터활용능력2급</option>
+        <option value="컴퓨터활용능력2급">컴퓨터활용능력2급</option>
         </select>
         <br><br>
 
-        <!-- 연도/회차 선택 -->
         <label for="version">시험 회차:</label>
         <select name="version" id="version" required>
         <option value="2024-1">2024년 1회</option>
         <option value="2024-2">2024년 2회</option>
-        <option value="2024-3">2024년 3회</option>
         </select>
         <br><br>
 
@@ -31,7 +35,7 @@
 
     <br>
     <form action="/logout" method="get">
-        <button type="submit">로그아웃</button>
+        <button type="submit">← 돌아가기</button>
     </form>
 </body>
 </html>
