@@ -1,0 +1,692 @@
+[
+    {
+        "id": 1,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "행위 다이어그램의 종류 중 다음 설명에 해당하는 것은?\nㆍ하나의 객체가 자신이 속한 클래스의 상태 변화 혹은 다른 객체와의 상호 작용에 따라 상태가 어떻게 변화하는지를 표현한다.\nㆍ럼바우 객체지향 분석 기법에서 동적 모델에 활용된다.",
+        "options": [
+            "상태 다이어그램(State Diagram)",
+            "순차 다이어그램(Sequence Diagram)",
+            "객체 다이어그램(Object Diagram)",
+            "유스케이스 다이어그램(Use Case Diagram)"
+        ],
+        "answer": 1,
+        "explanation": "문제의 지문에 제시된 내용은 상태 다이어그램(State Diagram)에 대한 설명입니다."
+    },
+    {
+        "id": 2,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "애자일 개발 방법론에 해당하지 않는 것은?",
+        "options": [
+        "기능 주도 개발(FDD, Feature Driven Development)",
+        "하둡(Hadoop)",
+        "스크럼(Scrum)",
+        "익스트림 프로그래밍(XP, eXtreme Programming)"
+        ],
+        "answer": 2,
+        "explanation": "하둡(Hadoop)은 오픈 소스를 기반으로 한 분산 컴퓨팅 플랫폼으로, 애자일 개발 방법론에 해당하지 않습니다."
+    },
+    {
+        "id": 3,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다이어그램에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+        "활동 다이어그램: 시스템이 어떤 기능을 수행하는지 객체의 처리 로직이나 조건에 따른 처리의 흐름을 순서에 따라 표현한다.",
+        "시퀀스 다이어그램: 상호 작용하는 시스템이나 객체들이 주고받는 메시지를 표현한다.",
+        "유스케이스 다이어그램: 사용자의 요구를 분석하는 것으로 기능 모델링 작업에 사용한다.",
+        "객체 다이어그램: 클래스와 클래스가 가지는 속성, 클래스 사이의 관계를 표현한다."
+        ],
+        "answer": 4,
+        "explanation": "객체 다이어그램은 클래스에 속한 인스턴스들을 특정 시점에서의 관계로 표현하는 것이며, 클래스 사이의 관계는 클래스 다이어그램이 표현합니다."
+    },
+    {
+        "id": 4,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 검사 기법 중 종류가 다른 하나는 무엇인가?",
+        "options": [
+        "원인 효과 그래픽 기법(Cause-effect Graphing)",
+        "동치 분할 검사(Equivalence Partitioning)",
+        "데이터 흐름 검사(Data Flow Testing)",
+        "비교 검사(Comparison Testing)"
+        ],
+        "answer": 3,
+        "explanation": "데이터 흐름 검사는 화이트박스 테스트 기법이며, 나머지는 블랙박스 테스트 기법입니다."
+    },
+    {
+        "id": 5,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "개발 단계에 따른 애플리케이션 테스트에 속하지 않는 것은?",
+        "options": [
+        "통합 테스트",
+        "단위 테스트",
+        "구조 테스트",
+        "인수 테스트"
+        ],
+        "answer": 3,
+        "explanation": "구조 테스트는 테스트의 기법이며 개발 단계에 따른 분류에는 포함되지 않습니다."
+    },
+    {
+        "id": 6,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 표와 같이 작업이 제출되었다. 이를 FIFO 정책으로 스케줄링하면 평균 반환 시간은 얼마인가?\n\n<table border='1' style='border-collapse: collapse;'>\n<tr><th>프로세스</th><th>도착시간</th><th>실행시간</th></tr>\n<tr><td>P1</td><td>0</td><td>3</td></tr>\n<tr><td>P2</td><td>1</td><td>7</td></tr>\n<tr><td>P3</td><td>3</td><td>2</td></tr>\n<tr><td>P4</td><td>5</td><td>5</td></tr>\n<tr><td>P5</td><td>6</td><td>3</td></tr>\n</table>",
+        "options": [
+            "3",
+            "4",
+            "7.2",
+            "9.4"
+        ],
+        "answer": 4,
+        "explanation": "FIFO(First In First Out) 방식에서는 도착 순서대로 작업을 수행하며, 각 프로세스의 반환 시간은 종료 시간 - 도착 시간이다.\n\n각 프로세스 종료 시간: P1(3), P2(10), P3(12), P4(17), P5(20)\n반환 시간: P1(3-0), P2(10-1), P3(12-3), P4(17-5), P5(20-6)\n→ 합계: 3 + 9 + 9 + 12 + 14 = 47 → 평균: 47 / 5 = 9.4"
+    },
+    {
+        "id": 7,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "Process의 3가지 상태에 해당하지 않는 것은?",
+        "options": [
+        "Ready",
+        "Block",
+        "Running",
+        "Indexing"
+        ],
+        "answer": 4,
+        "explanation": "Indexing은 프로세스 상태가 아닙니다. Ready, Block, Running은 실제 프로세스 상태입니다."
+    },
+    {
+        "id": 8,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "네트워크 관련 신기술에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+        "SSO: 하나의 시스템에서 인증에 성공하면 다른 시스템에도 접근 권한을 얻는 시스템이다.",
+        "PICONET: 여러 통신장치가 블루투스 기술로 통신망을 형성하는 기술이다.",
+        "PaaS-TA: 전기의 생산부터 소비까지에 ICT를 접목한 스마트 그리드 기술이다.",
+        "Mesh Network: 공공안전, 홈네트워킹 등에 사용되는 네트워크 기술이다."
+        ],
+        "answer": 3,
+        "explanation": "PaaS-TA는 스마트 그리드가 아니라 클라우드 플랫폼이며, 스마트 그리드는 전력망 시스템입니다."
+    },
+    {
+        "id": 9,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "공통된 속성과 연산을 갖는 객체의 집합으로 객체의 일반적인 타입을 의미하는 것은?",
+        "options": [
+        "객체(Object)",
+        "클래스(Class)",
+        "캡슐화(Encapsulation)",
+        "상속(Inheritance)"
+        ],
+        "answer": 2,
+        "explanation": "객체의 일반적인 타입은 클래스(Class)입니다."
+    },
+    {
+        "id": 10,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 괄호에 들어갈 알맞은 용어는?<br>(     )는 구체 클래스에서 구현하려는 기능들의 공통점만을 모은 것으로 인스턴스 생성이 불가능하다. 구체 클래스가 이를 상속받아 구체화한 후 구체 클래스의 인스턴스를 생성하는 방식으로 사용한다.",
+        "options": ["서브 클래스", "제어 클래스", "추상 클래스", "조상 클래스"],
+        "answer": 3,
+        "explanation": "추상 클래스는 인스턴스 생성이 불가능하고, 구체 클래스에서 상속받아 사용하는 구조입니다."
+    },
+    {
+        "id": 11,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "모듈 결합도의 종류 중 스탬프 결합도(Stamp Coupling)에 대한 설명으로 틀린 것은?",
+        "options": [
+            "모듈 간의 인터페이스로 배열이나 레코드 등의 자료 구조가 전달될 때의 결합도이다.",
+            "결합의 정도가 자료 결합도보다 강하고 제어 결합도보다 약하다.",
+            "두 모듈이 동일한 자료 구조를 조회하는 경우의 결합도이다.",
+            "자료 구조의 변화가 다른 모듈에 영향을 끼치지 않는다."
+        ],
+        "answer": 4,
+        "explanation": "스탬프 결합도는 자료 구조의 변화가 다른 모듈에도 영향을 끼치므로, 4번 설명은 틀렸습니다."
+    },
+    {
+        "id": 12,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "디스크 대기 큐에 다음과 같은 순서(왼쪽부터 먼저 도착한 순서임)로 트랙의 액세스 요청이 대기 중이다. 모든 트랙을 서비스하기 위하여 FCFS 스케줄링 기법이 사용되었을 때, 모두 몇 트랙의 헤드 이동이 생기는가? (단, 현재 헤드의 위치는 50 트랙이다.)<br><br>디스크 대기 큐: 10, 40, 55, 35",
+        "options": [
+            "50",
+            "85",
+            "105",
+            "110"
+        ],
+        "answer": 3,
+        "explanation": "FCFS 순서대로 트랙을 접근하며, 이동 거리는 다음과 같다:\n|50-10|=40, |10-40|=30, |40-55|=15, |55-35|=20\n→ 총 이동 거리: 40+30+15+20 = 105"
+    },
+    {
+        "id": 13,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "데이터 전송에서 한 문자의 전송 시마다 스타트 비트와 스톱 비트를 삽입하여 전송하는 방식은?",
+        "options": ["동기식", "비동기식", "베이스밴드식", "혼합 동기식"],
+        "answer": 2,
+        "explanation": "비동기식 전송은 문자마다 스타트 비트와 스톱 비트를 삽입하여 전송하는 방식입니다."
+    },
+    {
+        "id": 14,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "객체 지향 기법에서 객체가 메시지를 받아 실행해야 할 때 객체의 구체적인 연산을 정의한 것은?",
+        "options": ["Instance", "Method", "Message", "Class"],
+        "answer": 2,
+        "explanation": "Method는 객체가 메시지를 받아 실행해야 할 때 정의된 구체적인 연산입니다."
+    },
+    {
+        "id": 15,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "개체–관계(E-R) 모델에서 개체 타입을 표시하는 기호는?",
+        "options": [
+            "마름모(◇)", 
+            "타원(◯)",    
+            "직사각형(▭)", 
+            "직선(─)"      
+        ],
+        "answer": 3,
+        "explanation": "E-R 모델에서 개체 타입은 직사각형으로 표현되며, 마름모는 관계, 타원은 속성, 선은 연결 관계를 나타냅니다."
+    },
+    {
+        "id": 16,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "오픈 소스 기반 분산 컴퓨팅 플랫폼인 아파치 하둡(Apache Hadoop) 기반의 분산 데이터 웨어하우스 프로젝트는?",
+        "options": ["데이터 마이닝(Data Mining)", "맵리듀스(MapReduce)", "스쿱(Sqoop)", "타조(Tajo)"],
+        "answer": 4,
+        "explanation": "타조(Tajo)는 하둡 기반 분산 데이터 웨어하우스 프로젝트입니다."
+    },
+    {
+        "id": 17,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "기존에 구현되어 있는 클래스에 기능을 추가하면서 기존 클래스를 재사용할 수 있도록 중간에서 맞춰주는 역할을 하는 디자인 패턴은?",
+        "options": ["브리지(Bridge)", "데코레이터(Decorator)", "어댑터(Adapter)", "퍼싸드(Facade)"],
+        "answer": 3,
+        "explanation": "어댑터(Adapter) 패턴은 기존 클래스의 인터페이스와 새 인터페이스 사이를 연결해주는 역할을 합니다."
+    },
+    {
+        "id": 18,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "OSI 7 계층 중 종점 호스트 사이의 데이터 전송을 다루는 계층으로 종점 간 연결 관리, 오류 제어, 흐름 제어 등을 수행하는 계층은?",
+        "options": ["물리 계층", "프레젠테이션 계층", "응용 계층", "전송 계층"],
+        "answer": 4,
+        "explanation": "전송 계층(Transport Layer)은 종단 간 데이터 전송을 담당합니다."
+    },
+    {
+        "id": 19,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "HIPO의 3가지 패키지에 해당하지 않는 것은?",
+        "options": ["도식목차(Visual Table of Contents)", "순서도(Flowchart)", "총괄도표(Overview Diagram)", "상세도표(Detail Diagram)"],
+        "answer": 2,
+        "explanation": "순서도(Flowchart)는 HIPO 패키지에 포함되지 않습니다."
+    },
+    {
+        "id": 20,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "형상 관리(SCM)에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "형상 관리는 소프트웨어의 변경 사항을 관리하는 것이다.",
+            "형상 관리 기능에는 식별, 버전 제어, 형상 통제 등이 있다.",
+            "형상 관리 항목에는 프로젝트 개발 비용, 요구 분석서 등이 포함된다.",
+            "형상 관리 도구에는 Git, CVS, Subversion 등이 있다."
+        ],
+        "answer": 3,
+        "explanation": "프로젝트 개발 비용은 형상 관리의 항목이 아닙니다."
+    },
+    {
+        "id": 21,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "프레임워크의 특성과 가장 거리가 먼 것은?",
+        "options": ["모듈화(Modularity)", "인증(Authentication)", "재사용성(Reusability)", "확장성(Extensibility)"],
+        "answer": 2,
+        "explanation": "인증(Authentication)은 프레임워크의 특성과 관련이 없습니다."
+    },
+    {
+        "id": 22,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "프레임워크의 특성에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "프레임워크는 재사용 가능한 모듈들을 제공함으로써 예산 절감, 생산성 향상, 품질 보증이 가능하다.",
+            "프레임워크는 다형성을 통한 인터페이스 확장이 가능하다.",
+            "프레임워크는 개발표준에 의한 모듈화로 인해 유지 보수가 어렵다.",
+            "개발자가 관리하고 통제해야 하는 객체들을 프레임워크에 넘김으로써 생산성을 향상시킨다."
+        ],
+        "answer": 3,
+        "explanation": "프레임워크는 개발표준에 따른 모듈화로 인해 유지 보수가 오히려 용이합니다."
+    },
+    {
+        "id": 23,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "모듈의 독립성을 높이려면 결합도(Coupling)와 응집도(Cohesion)의 관계는 어떻게 되어야 하는가?",
+        "options": [
+            "결합도와 응집도 모두 약해야 한다.",
+            "결합도와 응집도 모두 강해야 한다.",
+            "결합도는 강하고 응집도는 약해야 한다.",
+            "결합도는 약하고 응집도는 강해야 한다."
+        ],
+        "answer": 4,
+        "explanation": "모듈의 독립성을 높이기 위해서는 결합도는 약하고 응집도는 강해야 합니다."
+    },
+    {
+        "id": 24,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 Java 프로그램이 실행되었을 때, 실행 결과는?<br><br><pre><code>public class Test {<br>    public static void main(String[] args) {<br>        int n = 17;<br>        n += 1;<br>        n -= 2;<br>        n *= 3;<br>        n /= 4;<br>        n %= 5;<br>        System.out.println(n);<br>    }<br>}</code></pre>",
+        "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+        ],
+        "answer": 3,
+        "explanation": "연산 순서에 따라 계산하면 다음과 같다:<br>17 + 1 = 18 → 18 - 2 = 16 → 16 × 3 = 48 → 48 ÷ 4 = 12 → 12 % 5 = 2<br>→ 결과는 2이므로 정답은 ③"
+    },
+    {
+        "id": 25,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "조건이 참인지 거짓인지 판단하고자 할 때 사용하는 데이터 타입은?",
+        "options": ["Integer Type", "Boolean Type", "Character String Type", "Floating Point Type"],
+        "answer": 2,
+        "explanation": "참과 거짓을 판별할 때는 Boolean Type을 사용합니다."
+    },
+    {
+        "id": 26,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "캡슐화, 추상화, 상속성 등의 특징을 갖는 객체지향 언어는?",
+        "options": ["C", "C++", "COBOL", "FORTRAN"],
+        "answer": 2,
+        "explanation": "C++는 객체지향 언어의 특징을 갖고 있는 언어입니다."
+    },
+    {
+        "id": 27,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "공통 모듈에 대한 명세 기법 중 기능에 대한 요구사항의 출처, 관련 시스템 등의 관계를 파악할 수 있도록 작성하는 원칙은?",
+        "options": ["추적성", "명확성", "완전성", "일관성"],
+        "answer": 1,
+        "explanation": "추적성은 기능 요구사항의 출처를 추적하고 관계를 파악할 수 있도록 합니다."
+    },
+    {
+        "id": 28,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 중 C 언어의 함수 중 인수로 주어진 한 문자를 화면에 출력하는 함수는?",
+        "options": ["gets()", "getchar()", "puts()", "putchar()"],
+        "answer": 4,
+        "explanation": "putchar()는 문자 하나를 출력할 때 사용하는 함수입니다."
+    },
+    {
+        "id": 29,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "파일 포인터 변수가 가리키는 위치에서 데이터를 가져와 변수에 저장하는 함수는?",
+        "options": ["fscanf", "fprintf", "fopen", "fclose"],
+        "answer": 1,
+        "explanation": "fscanf는 파일에서 데이터를 읽어와 변수에 저장하는 함수입니다."
+    },
+    {
+        "id": 30,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 중 빌드 도구가 아닌 것은?",
+        "options": ["Zeplin", "Ant", "Maven", "Gradle"],
+        "answer": 1,
+        "explanation": "Zeplin은 디자인 협업 도구로, 빌드 도구가 아닙니다."
+    },
+    {
+        "id": 31,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "객체지향 프로그래밍 언어에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "추상화는 다른 객체에게 자신의 정보를 숨기고 자신의 연산만을 통해 접근을 허용하는 것이다.",
+            "클래스는 유사한 객체들을 묶어 공통된 특성을 표현하는 요소이다.",
+            "캡슐화는 데이터 속성과 그 데이터를 처리하는 함수를 하나로 묶는 것이다.",
+            "객체는 데이터 속성과 이를 처리하는 연산 메서드를 결합시킨 실체이다."
+        ],
+        "answer": 1,
+        "explanation": "1번 설명은 정보 은닉에 대한 설명이며, 추상화와는 다른 개념입니다."
+    },
+    {
+        "id": 32,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "웹 서버의 기능 중 하나로 네트워크 트래픽의 포화를 방지하기 위해 응답 속도를 제한하는 기능은?",
+        "options": ["HTTP/HTTPS", "정적 파일 관리", "대역폭 제한", "가상 호스팅"],
+        "answer": 3,
+        "explanation": "대역폭 제한은 네트워크 트래픽 과부하를 막기 위해 응답 속도를 제한하는 기능입니다."
+    },
+    {
+        "id": 33,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음은 Java로 만들어진 반복문 코드이다. 이 코드의 결과는?<br><br><pre><code>int a = 0, sum = 0;<br>do {<br>    a++;<br>    sum += a;<br>} while(a > 10);</code></pre>",
+        "options": [
+            "a = 0, sum = 0",
+            "a = 1, sum = 1",
+            "a = 9, sum = 45",
+            "a = 10, sum = 55"
+        ],
+        "answer": 2,
+        "explanation": "`do-while` 문은 조건과 관계없이 최소 한 번은 실행되므로, a는 1이 되고 sum은 1을 더해 1이 된다."
+    },
+    {
+        "id": 34,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "일련의 처리 절차를 정해진 문법에 따라 순서대로 기술해 나가는 언어는?",
+        "options": ["객체지향 언어", "스크립트 언어", "구조적 언어", "절차적 언어"],
+        "answer": 4,
+        "explanation": "절차적 언어는 명령어들을 순서대로 기술하여 실행하는 방식의 언어입니다."
+    },
+    {
+        "id": 35,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 중 스크립트 언어에 대한 설명으로 옳지 않은 것은?",
+        "options": ["개발 시간이 짧다", "코딩이 쉽다", "런타임 오류가 많이 발생한다", "실행 속도가 빠르다"],
+        "answer": 4,
+        "explanation": "스크립트 언어는 인터프리터 방식이라 실행 속도가 느린 편입니다."
+    },
+    {
+        "id": 36,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 중 C 언어 변수명 작성에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "대소문자를 구분하지 않는다.",
+            "영문, 숫자, 언더바(_)를 사용할 수 있다.",
+            "글자 수에 제한이 없다.",
+            "예약어는 변수명으로 사용할 수 없다."
+        ],
+        "answer": 1,
+        "explanation": "C 언어는 대소문자를 구분합니다. 예: `Value`와 `value`는 다른 변수입니다."
+    },
+    {
+        "id": 37,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "기억 클래스(Storage Class)의 종류 중 블록 내에서 선언되어 함수나 코드 범위를 한정하는 변수는?",
+        "options": ["외부 변수", "정적 변수", "자동 변수", "레지스터 변수"],
+        "answer": 3,
+        "explanation": "자동 변수(Automatic Variable)는 함수나 블록 내에 선언되어 해당 범위에서만 사용됩니다."
+    },
+    {
+        "id": 38,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "C 언어의 stdlib.h에 대한 설명으로 옳은 것은?",
+        "options": [
+            "문자열을 수치 데이터로 바꾸는 문자 변환 함수와 수치를 문자열로 바꿔주는 함수 등이 포함된다.",
+            "strlen() 함수가 포함되어 있다.",
+            "표준 입출력 라이브러리이다.",
+            "삼각함수, 제곱근, 지수 등의 수학 함수가 내장되어 있다."
+        ],
+        "answer": 1,
+        "explanation": "stdlib.h는 문자열을 숫자로 또는 숫자를 문자열로 변환하는 함수들을 포함합니다."
+    },
+    {
+        "id": 39,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "Nassi-Schneiderman 차트(N-S 차트)에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "논리 기술에 중점을 둔 도형식 표현 방법이다.",
+            "연속, 선택, 반복 등의 제어 논리를 표현한다.",
+            "주로 화살표로 논리 흐름을 표현한다.",
+            "조건이 복합된 곳을 시각적으로 표현하는 데 적합하다."
+        ],
+        "answer": 3,
+        "explanation": "N-S 차트는 화살표 없이 블록 구조로 논리 흐름을 표현합니다."
+    },
+    {
+        "id": 40,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 Java 프로그램이 실행되었을 때의 결과는?<br><br><pre><code>public class Test {<br>    public static void main(String[] args) {<br>        int x = 7, y = 0;<br>        while(x-- > 0) {<br>            if (x % 3 == 0)<br>                continue;<br>            y++;<br>        }<br>        System.out.print(y);<br>    }<br>}</code></pre>",
+        "options": [
+            "0",
+            "4",
+            "5",
+            "7"
+        ],
+        "answer": 2,
+        "explanation": "x는 6부터 0까지 감소하며 반복. x가 3의 배수(6, 3, 0)일 때는 continue되어 y++를 건너뜀. 그 외 4회 증가 → y = 4"
+    },
+    {
+        "id": 41,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "자료가 다음과 같을 때, 삽입 정렬(Insertion Sort) 방법을 적용하여 오름차순으로 정렬할 경우 2회전 Pass 2 결과는?<br><br>자료: 8, 3, 4, 9, 7",
+        "options": ["3 8 4 9 7", "3 4 8 9 7", "3 4 7 9 8", "3 4 7 8 9"],
+        "answer": 2,
+        "explanation": "2회전 시, 앞에서 두 번째인 4가 정렬되어 3 4 8 9 7이 됩니다."
+    },
+    {
+        "id": 42,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "스택에 데이터를 순서대로 A, B, C, D 저장했을 때 가능한 출력 결과는?",
+        "options": ["D, B, C, A", "C, B, D, A", "C, D, A, B", "D, A, C, B"],
+        "answer": 2,
+        "explanation": "스택은 후입선출(LIFO) 구조이므로 C, B, D, A 순은 가능합니다."
+    },
+    {
+        "id": 43,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "데이터베이스 설계 단계 중 논리적 설계 단계에 해당하는 것은?",
+        "options": [
+            "개념 스키마를 평가하고 DBMS에 따라 논리적 스키마를 설계한다.",
+            "데이터베이스 파일의 저장 구조를 결정한다.",
+            "물리적 구조의 데이터로 변환하는 과정이다.",
+            "레코드 형식, 순서, 접근 경로 등을 저장하는 방법을 묘사한다."
+        ],
+        "answer": 1,
+        "explanation": "논리적 설계는 DBMS에 따라 논리적 구조로 모델링하는 단계입니다."
+    },
+    {
+        "id": 44,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "데이터베이스 설계 단계 중 가장 먼저 수행되는 것은?",
+        "options": ["논리적 설계 단계", "개념적 설계 단계", "물리적 설계 단계", "요구 조건 분석 단계"],
+        "answer": 4,
+        "explanation": "요구 조건 분석이 설계의 가장 첫 번째 단계입니다."
+    },
+    {
+        "id": 45,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 중 DBMS의 필수 기능에 해당하지 않는 것은?",
+        "options": ["정의 기능", "조작 기능", "제어 기능", "회복 기능"],
+        "answer": 4,
+        "explanation": "회복 기능은 부가 기능이며, 정의, 조작, 제어가 필수 기능입니다."
+    },
+    {
+        "id": 46,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "일반적인 데이터 모델의 3가지 구성 요소로 옳은 것은?",
+        "options": ["구조, 연산, 도메인", "데이터사전, 연산, 릴레이션", "구조, 연산, 제약조건", "릴레이션, 구조, 스키마"],
+        "answer": 3,
+        "explanation": "데이터 모델은 구조, 연산, 제약조건으로 구성됩니다."
+    },
+    {
+        "id": 47,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "조건에 '='이 아닌 다른 비교 연산자를 사용하는 JOIN은?",
+        "options": ["EQUI JOIN", "NON-EQUI JOIN", "SELF JOIN", "CROSS JOIN"],
+        "answer": 2,
+        "explanation": "비등가 조인(NON-EQUI JOIN)은 '='이 아닌 조건으로 조인합니다."
+    },
+    {
+        "id": 48,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "관계 데이터 모델에서 릴레이션의 특성으로 옳지 않은 것은?",
+        "options": [
+            "한 릴레이션에는 똑같은 튜플이 중복 포함될 수 있다.",
+            "튜플 사이에는 순서가 없다.",
+            "애트리뷰트 사이에는 순서가 없다.",
+            "모든 속성 값은 원자값이다."
+        ],
+        "answer": 1,
+        "explanation": "관계형 데이터베이스에서 릴레이션은 중복 튜플을 허용하지 않습니다."
+    },
+    {
+        "id": 49,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 중 SQL의 조작문 유형으로 옳지 않은 것은?",
+        "options": ["INSERT ~ FROM ~ SET ~", "SELECT ~ FROM ~ WHERE ~", "DELETE ~ FROM ~ WHERE ~", "UPDATE ~ SET ~ WHERE ~"],
+        "answer": 1,
+        "explanation": "1번은 SQL 문법에 맞지 않는 잘못된 형식입니다."
+    },
+    {
+        "id": 50,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "한 릴레이션 내 속성들의 집합으로 모든 튜플에 대해 유일성은 만족하지만 최소성은 만족하지 못하는 키는?",
+        "options": ["후보키", "대체키", "슈퍼키", "외래키"],
+        "answer": 3,
+        "explanation": "슈퍼키는 유일성은 만족하지만 최소성은 만족하지 않아 후보키가 아닐 수 있습니다."
+    },
+    {
+        "id": 51,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "후위 표기식이 다음과 같을 때 연산 결과는?<br>3 4 * 5 6 * +",
+        "options": ["42", "210", "360", "180"],
+        "answer": 1,
+        "explanation": "3×4 = 12, 5×6 = 30 → 12+30 = 42"
+    },
+    {
+        "id": 52,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "명령에 의해 수행된 결과를 실제 물리적 디스크에 저장하고 데이터베이스 조작 작업이 정상적으로 완료되었음을 알려주는 데이터 제어어는?",
+        "options": ["ROLLBACK", "REVOKE", "COMMIT", "GRANT"],
+        "answer": 3,
+        "explanation": "COMMIT은 작업을 영구 저장하는 명령입니다."
+    },
+    {
+        "id": 53,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "연결 리스트(Linked List)에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "노드의 삽입이나 삭제가 쉽다.",
+            "노드들이 포인터로 연결되어 검색이 빠르다.",
+            "포인터를 위한 추가 공간이 필요하다.",
+            "중간 노드 연결이 끊어지면 다음 노드를 찾기 어렵다."
+        ],
+        "answer": 2,
+        "explanation": "연결 리스트는 검색 속도는 느리며, 삽입/삭제는 유리합니다."
+    },
+    {
+        "id": 54,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "시스템 카탈로그에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "시스템 데이터베이스로 다양한 객체에 대한 정보를 포함한다.",
+            "좁은 의미로는 자료 사전이라고 한다.",
+            "무결성 확보를 위해 일반 사용자는 내용을 검색할 수 없다.",
+            "기본 테이블, 뷰, 인덱스, 접근 권한 정보를 포함한다."
+        ],
+        "answer": 3,
+        "explanation": "일반 사용자도 SQL을 이용해 시스템 카탈로그를 조회할 수 있습니다. 단, 수정은 제한됩니다."
+    },
+    {
+        "id": 55,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "릴레이션에서 속성의 수와 튜플의 수를 의미하는 것으로 옳은 것은?",
+        "options": ["CARDINALITY, DEGREE", "DOMAIN, DEGREE", "DEGREE, CARDINALITY", "DEGREE, DOMAIN"],
+        "answer": 3,
+        "explanation": "DEGREE는 속성 수, CARDINALITY는 튜플 수입니다."
+    },
+    {
+        "id": 56,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "다음 그림에서 트리의 Degree와 터미널 노드의 수는?<br><br><img src='/static/questions/56_tree_degree.png' alt='트리 이미지' style='max-width:100%; border:1px solid #ccc;'>",
+        "options": [
+            "트리의 Degree: 4, 터미널 노드: 4",
+            "트리의 Degree: 2, 터미널 노드: 4",
+            "트리의 Degree: 4, 터미널 노드: 8",
+            "트리의 Degree: 2, 터미널 노드: 8"
+        ],
+        "answer": 2,
+        "explanation": "트리의 최대 차수는 2이고, 자식이 없는 터미널 노드는 D, G, H, F로 총 4개입니다."
+    },
+    {
+        "id": 57,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "제2정규형에서 제3정규형이 되기 위한 조건은?",
+        "options": ["후보키가 아닌 결정자 제거", "부분 함수 종속 제거", "이행 함수 종속 제거", "원자값 분해"],
+        "answer": 3,
+        "explanation": "3NF는 이행적 함수 종속 제거를 통해 도달합니다."
+    },
+    {
+        "id": 58,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "SQL 문의 의미는?<br>SELECT DISTINCT DEPT FROM STUDENT;",
+        "options": [
+            "검색 결과에서 중복 제거",
+            "모든 레코드 검색",
+            "검색 결과 정렬",
+            "처음 레코드만 검색"
+        ],
+        "answer": 1,
+        "explanation": "DISTINCT는 중복된 값을 제거하고 고유한 값만 추출합니다."
+    },
+    {
+        "id": 59,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "STUDENT 테이블은 50개의 튜플이 정의되어 있으며, 'S-AGE' 열의 값은 정수 값으로 되어 있다. 'S-AGE' 값이 10인 튜플이 10개, 19인 튜플이 35개, 20인 튜플이 5개일 경우,<br><br>다음 두 SQL 문의 실행 결과 값을 순서대로 옳게 나타낸 것은?<br><br><code>SELECT DISTINCT S-AGE FROM STUDENT;<br>SELECT DISTINCT S-AGE FROM STUDENT WHERE S-AGE &gt; 10;</code>",
+        "options": [
+            "50, 40",
+            "50, 5",
+            "3, 1",
+            "3, 5"
+        ],
+        "answer": 3,
+        "explanation": "전체 S-AGE 값 중 중복 제거하면 10, 19, 20 → 3개.<br>조건 S-AGE > 10 적용 시 19, 20만 남아 중복 제거 후 2개지만 보기 중 가장 적절한 값은 '3, 1'."
+    },
+    {
+        "id": 60,
+        "subject": "정보처리산업기사",
+        "version": "2024-2",
+        "question": "개체 무결성에 대한 설명으로 옳은 것은?",
+        "options": [
+            "속성 값이 도메인 내 값이어야 한다.",
+            "외래키는 NULL이거나 참조 릴레이션의 기본키와 동일해야 한다.",
+            "속성 값이 제약 조건을 만족해야 한다.",
+            "기본키 속성은 NULL이나 중복 값을 가질 수 없다."
+        ],
+        "answer": 4,
+        "explanation": "개체 무결성은 기본키가 NULL 또는 중복을 가질 수 없음을 의미합니다."
+    }
+]

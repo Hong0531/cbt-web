@@ -7,6 +7,11 @@
 <body>
     <h2>정보처리산업기사 CBT 로그인</h2>
 
+    <!-- ✅ 에러 메시지 출력 -->
+    {% if error %}
+        <p style="color: red;"><strong>{{ error }}</strong></p>
+    {% endif %}
+
     <!-- 로그인 폼 -->
     <form method="post" action="/login">
         <label>이름: <input type="text" name="name" required></label>
@@ -23,6 +28,5 @@
     <form action="/exam" method="get">
         <button type="submit">게스트로 시험 시작</button>
     </form>
-
 </body>
 </html>
