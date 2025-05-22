@@ -5,7 +5,7 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), unique=True, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class Answer(db.Model):
@@ -25,3 +25,14 @@ class ExamRecord(db.Model):
     end_time = db.Column(db.DateTime, nullable=False)
     correct_count = db.Column(db.Integer, nullable=False)
     user = db.relationship('User', backref=db.backref('exam_records', lazy=True))
+
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(100), nullable=False)
+    version = db.Column(db.String(20), nullable=False)  # ✅ 연도+회차 정보
+    question = db.Column(db.Text, nullable=False)
+    options = db.Column(db.JSON, nullable=False)
+    answer = db.Column(db.Integer, nullable=False)
+    explanation = db.Column(db.Text)
+
+
