@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 app.secret_key = '0531'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:1234@localhost/cbt_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:1234@localhost/cbt_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
