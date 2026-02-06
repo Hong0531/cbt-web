@@ -7,3 +7,6 @@ venv/
 
 # SQLite 데이터베이스 파일
 db.sqlite3
+
+# 환경변수 파일 (보안 중요!)
+.env
