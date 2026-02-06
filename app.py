@@ -1,14 +1,19 @@
+import os
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 from models import db, User, Answer, ExamRecord, Question
-import json
-import os
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+
+# .env 파일에서 환경변수 로드
+load_dotenv()
 
 app = Flask(__name__)
-REMOVED_SECRET
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:1234@localhost/cbt_db'
+# 보안 키 및 DB 설정 (환경변수에서 가져오기)
+app.secret_key = os.getenv('SECRET_KEY', 'default-secret-key')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///dev.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db.init_app(app)
 
 @app.route('/')
@@ -47,8 +52,7 @@ def guest_login():
     session.clear()
     session['user_id'] = None
     session['user_name'] = '게스트'
-    return redirect(url_for('select_subject'))  # ✅ 과목 선택 페이지로 리디렉션
-
+    return redirect(url_for('select_subject'))
 
 @app.route('/select')
 def select_subject():
@@ -59,7 +63,6 @@ def exam_page():
     subject = request.args.get('subject')
     version = request.args.get('version')
 
-    # ✅ 필수 파라미터 없으면 select로 돌려보냄
     if not subject or not version:
         return redirect(url_for('select_subject'))
 
@@ -73,8 +76,6 @@ def exam_page():
     return render_template('index.html', user_id=user_id, user_name=user_name,
                             subject=subject, version=version)
 
-
-
 @app.route('/logout')
 def logout():
     session.clear()
@@ -85,8 +86,6 @@ def get_questions():
     subject = request.args.get('subject') or session.get('subject', '정보처리산업기사')
     version = request.args.get('version') or session.get('version', '2024-1')
     
-    print(f"[DEBUG] subject: {subject}, version: {version}")  # 로그 확인용
-
     questions = Question.query.filter_by(subject=subject, version=version).all()
     result = [{
         "id": q.id,
@@ -96,7 +95,6 @@ def get_questions():
         "explanation": q.explanation
     } for q in questions]
     return jsonify(result)
-
 
 @app.route('/api/submit', methods=['POST'])
 def submit_answers():
@@ -224,5 +222,6 @@ def records():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+    host = os.environ.get("FLASK_HOST", "0.0.0.0")
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host=host, port=port)
