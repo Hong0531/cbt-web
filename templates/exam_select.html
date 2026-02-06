@@ -2,40 +2,50 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>시험 과목 선택</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>📚 시험 과목 선택</h2>
+<div class="container">
+    <div class="main selection-container">
+        <h2 class="page-title">📚 시험 과목 선택</h2>
 
-    {% if user_name %}
-        <p><strong>{{ user_name }}님</strong>, 응시할 시험을 선택하세요.</p>
-    {% else %}
-        <p>게스트님, 시험 과목을 선택하세요.</p>
-    {% endif %}
+        {% if user_name %}
+            <p class="sub-text"><strong>{{ user_name }}님</strong>, 합격을 기원합니다!<br>응시할 과목을 선택해주세요.</p>
+        {% else %}
+            <p class="sub-text">게스트님, 체험할 과목을 선택하세요.</p>
+        {% endif %}
 
-    <!-- ✅ 이 폼이 핵심 -->
-    <form action="/exam" method="get">
-        <label for="subject">과목:</label>
-        <select name="subject" id="subject" required>
-        <option value="정보처리산업기사">정보처리산업기사</option>
-        <option value="정보처리기능사">정보처리기능사</option>
-        <option value="컴퓨터활용능력2급">컴퓨터활용능력2급</option>
-        </select>
-        <br><br>
+        <form action="/exam" method="get" class="select-form">
+            <div class="form-group">
+                <label for="subject">📂 응시 과목</label>
+                <div class="select-wrapper">
+                    <select name="subject" id="subject" required>
+                        <option value="정보처리산업기사">정보처리산업기사</option>
+                        <!-- 데이터가 없는 과목은 disabled 처리 -->
+                        <option value="정보처리기능사" disabled>정보처리기능사 (준비중)</option>
+                        <option value="컴퓨터활용능력2급" disabled>컴퓨터활용능력2급 (준비중)</option>
+                    </select>
+                </div>
+            </div>
 
-        <label for="version">시험 회차:</label>
-        <select name="version" id="version" required>
-        <option value="2024-1">2024년 1회</option>
-        <option value="2024-2">2024년 2회</option>
-        </select>
-        <br><br>
+            <div class="form-group">
+                <label for="version">📅 기출 회차</label>
+                <div class="select-wrapper">
+                    <select name="version" id="version" required>
+                        <option value="2024-2">2024년 2회 기출문제</option>
+                        <option value="2024-1">2024년 1회 기출문제</option>
+                    </select>
+                </div>
+            </div>
 
-        <button type="submit">시험 시작!</button>
-    </form>
-
-    <br>
-    <form action="/logout" method="get">
-        <button type="submit">← 돌아가기</button>
-    </form>
+            <div class="form-actions">
+                <a href="/logout" class="btn btn-secondary">이전</a>
+                <button class="btn btn-primary" type="submit">시험 시작</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 </head>
 <body>
-    <h2>정보처리산업기사 CBT 로그인</h2>
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2 class="page-title">정보처리산업기사 CBT 로그인</h2>
 
-    <!-- ✅ 에러 메시지 출력 -->
-    {% if error %}
-        <p style="color: red;"><strong>{{ error }}</strong></p>
-    {% endif %}
+        {% if error %}
+            <p style="color:red;text-align:center;margin-bottom:8px"><strong>{{ error }}</strong></p>
+        {% endif %}
 
-    <!-- 로그인 폼 -->
-    <form method="post" action="/login">
-        <label>이름: <input type="text" name="name" required></label>
-        <br><br>
-        <button type="submit">로그인</button>
-    </form>
+        <form method="post" action="/login" class="auth-form">
+            <label for="name">이름</label>
+            <input id="name" type="text" name="name" required>
 
-    <br><hr>
-
-    <!-- 회원가입 링크 -->
-    <p>처음이신가요? 👉 <a href="/signup">회원가입</a></p>
-
-    <!-- 게스트로 바로 시험 시작 -->
-    <form action="/guest" method="get">
-        <button type="submit">게스트로 시작</button>
-    </form>
-
+            <div class="auth-actions">
+                <button class="btn btn-primary" type="submit">로그인</button>
+                <a href="/signup" class="btn btn-outline" role="button">회원가입</a>
+                <a href="/guest" class="btn btn-text" role="button">게스트로 시작</a>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
