@@ -43,15 +43,15 @@
 
 | 구분            | 화면                                                                                                  |
 | ------------- | --------------------------------------------------------------------------------------------------- |
-| 메인 시험 화면 (PC) | <img src="https://via.placeholder.com/600x400/e2e8f0/64748b?text=Main+Exam+View+(PC)" width="100%"> |
-| 모바일 반응형 뷰     | <img src="https://via.placeholder.com/300x500/e2e8f0/64748b?text=Mobile+View" width="60%">          |
+| 메인 시험 화면 (PC) | <img src="https://github.com/user-attachments/assets/77f0cb4f-e01a-44b1-9936-82c9d9d59133" width="50%"> |
+| 모바일 반응형 뷰     | <img src="https://github.com/user-attachments/assets/d9c13361-c523-40a7-8f9d-cddf3e11daf6" width="20%">          |
 
 
 
 | 구분            | 화면                                                                                          |
 | ------------- | ------------------------------------------------------------------------------------------- |
-| 로그인 / 회원가입    | <img src="https://via.placeholder.com/500x300/e2e8f0/64748b?text=Login+Page" width="100%">  |
-| 시험 결과 & 오답 노트 | <img src="https://via.placeholder.com/500x300/e2e8f0/64748b?text=Result+Page" width="100%"> |
+| 로그인 / 회원가입    | <img src="https://github.com/user-attachments/assets/a80aa7be-8709-4ad8-84ec-6052271e2f6e" width="50%">  |
+| 시험 결과 & 오답 노트 | <img src="https://github.com/user-attachments/assets/9b3ea482-09d7-4748-9c8d-947f33202d04" width="50%"><img src="https://github.com/user-attachments/assets/1d755dd0-cbbc-4a31-a13f-f7654708e58c" width="50%"><img src="https://github.com/user-attachments/assets/8d167d47-a9a7-4d46-8b2a-7699476345f1" width="50%">|
 
 
 🛠 기술 스택 (Tech Stack)
@@ -61,7 +61,6 @@
 | Backend  | Flask, Python           | Core Logic, REST API 서버, SQLAlchemy ORM |
 | Frontend | HTML, CSS, Vanilla JS   | Semantic Markup, Flexbox/Grid 기반 UI     |
 | Database | SQLite / MySQL          | 개발용(SQLite) · 배포용(MySQL)                |
-| Deploy   | Render / Cloud Platform | 클라우드 환경 배포                              |
 
 
 ✨ 주요 기능 (Key Features)
@@ -158,7 +157,7 @@
     python app.py
 
 
-브라우저에서 http://localhost:8080 접속
+    브라우저에서 http://localhost:8080 접속
 
 🔮 향후 계획 (Roadmap)
 
