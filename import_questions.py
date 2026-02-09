@@ -3,7 +3,7 @@ from app import app, db
 from models import Question
 
 # JSON 파일 경로
-input_path = "data/cbt_questions_2024_final_2.json"
+input_path = "data/cbt_questions_2024_final_1.json"
 
 with app.app_context():
     db.create_all()  # 테이블 생성 (이미 있다면 무시됨)
